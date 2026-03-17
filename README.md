@@ -27,7 +27,7 @@ Nesta fase, o foco é "organizar a casa" e garantir que o código seja testável
     * **Testes:** Criar os primeiros Testes Unitários com **JUnit 5** para as regras de negócio.
     * **Governança:** Criar um quadro Kanban (GitHub Projects). Proibido o Push direto na `main`; o código só entra via **Pull Request** com Code Review de um colega.
 
-** Entrega:** Repositório organizado, código limpo e suite de testes rodando localmente.
+**Entrega:** Repositório organizado, código limpo e suite de testes rodando localmente.
 
 ---
 
@@ -42,7 +42,7 @@ Agora o sistema precisa sobreviver ao reinício e ser portável para qualquer am
     * **CI (Continuous Integration):** Configurar **GitHub Actions** para que, a cada Push/PR, o sistema execute o Build e os Testes automaticamente.
     * **Artifacts:** O build bem-sucedido deve gerar uma imagem Docker ou um artefato `.jar` versionado no GitHub.
 
-** Entrega:** Pipeline de CI configurado (build verde) e aplicação rodando dentro de um container Docker.
+**Entrega:** Pipeline de CI configurado (build verde) e aplicação rodando dentro de um container Docker.
 
 ---
 
@@ -57,7 +57,7 @@ Hora de colocar o sistema no mundo real e garantir que ele continue de pé e sau
     * **Operação:** Realizar um "Chaos Test" (simular queda do banco e observar como a aplicação loga o erro).
     * **Documentação:** Finalizar o README com instruções de uso e evidências do monitoramento.
 
-** Entrega:** Link da aplicação rodando em produção com fluxo de entrega contínua ativo.
+**Entrega:** Link da aplicação rodando em produção com fluxo de entrega contínua ativo.
 
 ---
 

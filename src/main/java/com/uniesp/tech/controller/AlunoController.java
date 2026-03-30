@@ -1,12 +1,19 @@
 package com.uniesp.tech.controller;
 
 import com.uniesp.tech.service.AlunoService;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
+@Component
 public class AlunoController {
-    private AlunoService alunoService = new AlunoService();
+    private final AlunoService alunoService;
     private Scanner leitor = new Scanner(System.in);
+
+    // Injeção via construtor
+    public AlunoController(AlunoService alunoService) {
+        this.alunoService = alunoService;
+    }
 
     public void exibirMenu() {
         label:

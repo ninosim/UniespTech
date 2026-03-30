@@ -1,23 +1,26 @@
 package com.uniesp.tech.repository;
 
 import com.uniesp.tech.model.Aluno;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AlunoRepository {
+@Repository
+public interface AlunoRepository extends JpaRepository<Aluno, Long> {
 
     List<Aluno> listaAlunos = new ArrayList<>();
 
-    public void salvarAluno(Aluno aluno) {
+    public default void salvarAluno(Aluno aluno) {
         listaAlunos.add(aluno);
     }
 
-    public List<Aluno> listarAlunos() {
+    public default List<Aluno> listarAlunos() {
         return new ArrayList<>(listaAlunos);
     }
 
-    public void deletarAlunos() {
+    public default void deletarAlunos() {
         listaAlunos.clear();
     }
 }

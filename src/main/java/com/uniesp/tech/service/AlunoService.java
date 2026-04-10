@@ -22,14 +22,14 @@ public class AlunoService {
                 throw new Exception("CPF inválido! O número deve ter 11 dígitos.");
             }
             Aluno novoAluno = new Aluno(nome, cpf);
-            alunoRepository.salvarAluno(novoAluno);
+            alunoRepository.save(novoAluno);
         }
 
         public List<Aluno> listarTodos() {
-            return alunoRepository.listarAlunos();
+            return alunoRepository.findAll();
         }
 
         public void apagarTodos() {
-            alunoRepository.deletarAlunos();
+            alunoRepository.deleteAll();
         }
     }

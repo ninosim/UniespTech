@@ -1,18 +1,34 @@
 package com.uniesp.tech;
 
+import com.uniesp.tech.model.Aluno;
+import com.uniesp.tech.repository.AlunoRepository;
 import com.uniesp.tech.service.AlunoService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.Mock;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+import static org.mockito.ArgumentMatchers.*;
 
+@ExtendWith(MockitoExtension.class)
 public class AlunoServiceTest {
+
+    @Mock
+    private AlunoRepository alunoRepository;
+
+    @InjectMocks
     private AlunoService alunoService;
 
     @BeforeEach
     void setup() {
         // Inicializa o serviço antes de cada teste
-        alunoService = new AlunoService();
+        AlunoRepository repository = Mockito.mock(AlunoRepository.class);
+        AlunoService service = new AlunoService(repository);
     }
 
     @Test
@@ -44,8 +60,9 @@ public class AlunoServiceTest {
             alunoService.cadastrarAluno("Nino Xavier Simas", "11122233344");
         });
 
-        // Verificamos se a lista agora tem 1 aluno
-        assertEquals(1, alunoService.listarTodos().size());
-        assertEquals("Nino Xavier Simas", alunoService.listarTodos().get(0).getNome());
+        // Verificamos se o método save foi chamado
+        verify(alunoRepository, times(1)).save(any(Aluno.class));
+        //assertEquals(1, alunoService.listarTodos().size());
+        //assertEquals("Nino Xavier Simas", alunoService.listarTodos().get(0).getNome());
     }
 }

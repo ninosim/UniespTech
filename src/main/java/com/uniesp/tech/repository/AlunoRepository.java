@@ -9,18 +9,4 @@ import java.util.List;
 
 @Repository
 public interface AlunoRepository extends JpaRepository<Aluno, Long> {
-
-    List<Aluno> listaAlunos = new ArrayList<>();
-
-    public default void salvarAluno(Aluno aluno) {
-        listaAlunos.add(aluno);
-    }
-
-    public default List<Aluno> listarAlunos() {
-        return new ArrayList<>(listaAlunos);
-    }
-
-    public default void deletarAlunos() {
-        listaAlunos.clear();
-    }
 }

@@ -2,7 +2,7 @@ spring:
   application:
     name: SistemaUNIESP
   datasource:
-    url: jdbc:h2:file:/data/uniespdb;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:h2:file:./data/uniespdb
     driverClassName: org.h2.Driver
     username: sa
     password: password

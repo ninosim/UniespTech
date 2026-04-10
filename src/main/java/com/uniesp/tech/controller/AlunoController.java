@@ -1,65 +1,40 @@
 package com.uniesp.tech.controller;
 
+import com.uniesp.tech.model.Aluno;
 import com.uniesp.tech.service.AlunoService;
-import org.springframework.stereotype.Component;
+import com.uniesp.tech.repository.AlunoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
-import java.util.Scanner;
-
-@Component
+@RestController
+@RequestMapping("/alunos") // URL base: http://localhost:8080/alunos
 public class AlunoController {
-    private final AlunoService alunoService;
-    private Scanner leitor = new Scanner(System.in);
 
-    // Injeção via construtor
-    public AlunoController(AlunoService alunoService) {
-        this.alunoService = alunoService;
+    @Autowired
+    private AlunoRepository repository;
+
+    // Listar todos (Antiga opção de "Visualizar Alunos")
+    @GetMapping
+    public List<Aluno> listarTodos() {
+        return repository.findAll();
     }
 
-    public void exibirMenu() {
-        label:
-        while (true) {
-            System.out.println(("======= SISTEMA ACADÊMICO UNIESP TECH ======="));
-            System.out.println("1 - Cadastrar Aluno | 2 - Listar Alunos | 3 - Limpar Alunos| 4 - Sair");
-            String opcao = leitor.nextLine();
-
-            switch (opcao) {
-                case "1":
-                    cadastrar();
-                    break;
-                case "2":
-                    listar();
-                    break;
-                case "3":
-                    deletar();
-                    break;
-                case "4":
-                    System.out.println("Encerrando sistema...");
-                    break label;
-                default:
-                    System.out.println("Opção inválida!");
-            }
-        }
+    // Cadastrar (Antiga opção de "Cadastrar Aluno")
+    @PostMapping
+    public Aluno cadastrar(@RequestBody Aluno aluno) {
+        return repository.save(aluno);
     }
 
-    private void cadastrar() {
-        System.out.print("Nome: "); String nome = leitor.nextLine();
-        System.out.print("CPF (somente números): "); String cpf = leitor.nextLine();
-        try {
-            alunoService.cadastrarAluno(nome, cpf);
-            System.out.println("Aluno cadastrado com sucesso!");
-        } catch (Exception e) {
-            System.err.println("ERRO: " + e.getMessage());
-        }
+    // Buscar por ID (Nova funcionalidade útil)
+    @GetMapping("/{id}")
+    public Aluno buscarPorId(@PathVariable Long id) {
+        return repository.findById(id).orElse(null);
     }
 
-    private void listar() {
-        System.out.println("--- LISTA DE ALUNOS ---");
-        alunoService.listarTodos().forEach(a ->
-                System.out.println("Nome: " + a.getNome() + " | CPF: " + a.getCpf()));
-    }
-
-    private void deletar() {
-        alunoService.apagarTodos();
-        System.out.println("Dados apagados!");
+    // Deletar (Antiga opção de "Remover Aluno")
+    @DeleteMapping("/{id}")
+    public void deletar(@PathVariable Long id) {
+        repository.deleteById(id);
     }
 }

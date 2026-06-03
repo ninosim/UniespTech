@@ -1,3 +1,4 @@
+[![Java CI Professional Pipeline Optimized](https://github.com/ninosim/UniespTech/actions/workflows/CI.yml/badge.svg)](https://github.com/ninosim/UniespTech/actions/workflows/CI.yml)
 # Projeto Uniesp Tech: Sistema de Gestão Acadêmica Escalonável
 
 ## Situação-Problema
